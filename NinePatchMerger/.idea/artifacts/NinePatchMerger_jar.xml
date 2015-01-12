@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="NinePatchMerger:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NinePatchMerger_jar</output-path>
+    <root id="archive" name="NinePatchMerger.jar">
+      <element id="module-output" name="NinePatchMerger" />
+    </root>
+  </artifact>
+</component>
