@@ -19,7 +19,7 @@ public class Main {
         "/home/zoli/workspace/paystation/src/main/res/drawable-xxhdpi/btn_*.png"
     };
 
-    private static int marginLeftRight = 16;
+    private static int marginLeftRight = 16, marginTopBottom = 12;
 
     private static void putFile(List<File> ls, File f) {
         if (f.isFile()) {
@@ -55,11 +55,21 @@ public class Main {
         List<File> files = getFiles();
         for (File file : files) {
             BufferedImage image = ImageIO.read(file);
-            BufferedImage out = new BufferedImage(marginLeftRight * 2, image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g = (Graphics2D) out.getGraphics();
-            g.drawImage(image, 0, 0, marginLeftRight, out.getHeight(), 0, 0, marginLeftRight, image.getHeight(), null); // left side
-            g.drawImage(image, marginLeftRight, 0, out.getWidth(), out.getHeight(), image.getWidth() - marginLeftRight, 0, image.getWidth(), image.getHeight(), null); // right side
-            ImageIO.write(out, "png", file);
+            Graphics2D g;
+
+            //g.drawImage(image, dst-left-x, dst-top-y, dst-right-x, dst-bottom-y, src-left-x, src-top-y, src-right-x, src-bottom-y, null);
+
+            BufferedImage outLeftRight = new BufferedImage(marginLeftRight * 2, image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            g = (Graphics2D) outLeftRight.getGraphics();
+            g.drawImage(image, 0, 0, marginLeftRight, outLeftRight.getHeight(), 0, 0, marginLeftRight, image.getHeight(), null); // left side
+            g.drawImage(image, marginLeftRight, 0, outLeftRight.getWidth(), outLeftRight.getHeight(), image.getWidth() - marginLeftRight, 0, image.getWidth(), image.getHeight(), null); // right side
+
+            BufferedImage outTopBottom = new BufferedImage(outLeftRight.getWidth(), marginTopBottom * 2, BufferedImage.TYPE_INT_ARGB);
+            g = (Graphics2D) outTopBottom.getGraphics();
+            g.drawImage(outLeftRight, 0, 0, outTopBottom.getWidth(), marginTopBottom, 0, 0, outLeftRight.getWidth(), marginTopBottom, null); // top side
+            g.drawImage(outLeftRight, 0, marginTopBottom, outTopBottom.getWidth(), outTopBottom.getHeight(), 0, outLeftRight.getHeight() - marginTopBottom, outLeftRight.getWidth(), outLeftRight.getHeight(), null); // bottom side
+
+            ImageIO.write(outTopBottom, "png", file);
         }
     }
 
