@@ -45,25 +45,25 @@ public final class DirectoryMapping extends HashMap<String, String> implements S
             Entry<String, String> e = it.next();
             File srcDir = Const.fromSource(e.getKey());
             File dstDir = Const.fromSource(e.getValue());
-            Folders.ListFileProcessor srcFiles = Folders.listFiles(srcDir, 1, filters);
-            Folders.ListFileProcessor dstFiles = Folders.listFiles(dstDir, 1, filters);
+            Folders.ListFileProcessor src = Folders.listFiles(srcDir, 1, filters);
+            Folders.ListFileProcessor dst = Folders.listFiles(dstDir, 1, filters);
 
             List<Integer> proceed = new ArrayList<Integer>();
-            for (int srcIndex = 0; srcIndex < srcFiles.getRelativePaths().size(); srcIndex++) {
-                String srcRel = srcFiles.getRelativePaths().get(srcIndex);
-                int dstIndex = dstFiles.getRelativePaths().indexOf(srcRel);
+            for (int srcIndex = 0; srcIndex < src.getRelativePaths().size(); srcIndex++) {
+                String srcRel = src.getRelativePaths().get(srcIndex);
+                int dstIndex = dst.getRelativePaths().indexOf(srcRel);
                 if (dstIndex != -1) {
-                    list.add(new FileMeta(srcFiles.getList().get(srcIndex), dstFiles.getList().get(dstIndex)));
+                    list.add(new FileMeta(src.getFiles().get(srcIndex), dst.getFiles().get(dstIndex)));
                     proceed.add(dstIndex);
                 }
                 else {
-                    list.add(new FileMeta(srcFiles.getList().get(srcIndex), null));
+                    list.add(new FileMeta(src.getFiles().get(srcIndex), null));
                 }
             }
 
-            for (int dstIndex = 0; dstIndex < dstFiles.getRelativePaths().size(); dstIndex++) {
+            for (int dstIndex = 0; dstIndex < dst.getRelativePaths().size(); dstIndex++) {
                 if (!proceed.contains(dstIndex)) {
-                    list.add(new FileMeta(null, dstFiles.getList().get(dstIndex)));
+                    list.add(new FileMeta(null, dst.getFiles().get(dstIndex)));
                 }
             }
 

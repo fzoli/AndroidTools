@@ -72,8 +72,8 @@ public class Folders {
     public static class ListFileProcessor extends FileProcessorAdapter {
 
         private final File mRoot;
-        private final List<File> mList = new ArrayList<File>();
-        private final List<String> mListRelative = new ArrayList<String>();
+        private final List<File> mFiles = new ArrayList<File>();
+        private final List<String> mRelativePaths = new ArrayList<String>();
 
         public ListFileProcessor(File root, FileFilter... filters) {
             super(filters);
@@ -82,18 +82,18 @@ public class Folders {
 
         @Override
         public void onMatch(File f) {
-            mList.add(f);
+            mFiles.add(f);
             if (mRoot != null && mRoot.isDirectory()) {
-                mListRelative.add(Folders.toRelativePath(mRoot, f));
+                mRelativePaths.add(Folders.toRelativePath(mRoot, f));
             }
         }
 
-        public List<File> getList() {
-            return mList;
+        public List<File> getFiles() {
+            return mFiles;
         }
 
         public List<String> getRelativePaths() {
-            return mListRelative;
+            return mRelativePaths;
         }
 
     }
