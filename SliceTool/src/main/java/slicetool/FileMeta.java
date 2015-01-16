@@ -18,16 +18,24 @@
  */
 package slicetool;
 
+import org.apache.commons.io.FileUtils;
+import slicetool.util.Folders;
+
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Zoltán Farkas on 2015.01.16.
  */
 public class FileMeta {
 
-    private File mOriginFrom, mMoveFrom, mMoveTo;
+    private final File mSrcDir, mDstDir, mOriginFrom;
 
-    public FileMeta(File moveFrom, File moveTo) {
+    private File mTempCopy, mMoveFrom, mMoveTo;
+
+    public FileMeta(File srcDir, File dstDir, File moveFrom, File moveTo) {
+        mSrcDir = srcDir;
+        mDstDir = dstDir;
         mOriginFrom = moveFrom;
         mMoveFrom = moveFrom;
         mMoveTo = moveTo;
@@ -51,6 +59,15 @@ public class FileMeta {
 
     public void setMoveTo(File moveTo) {
         mMoveTo = moveTo;
+    }
+
+    public File getTempCopy() throws IOException {
+        if (mTempCopy == null && mOriginFrom != null && mOriginFrom.isFile()) {
+            String relOrigin = Folders.toRelativePath(mSrcDir.getParentFile(), mOriginFrom);
+            mTempCopy = new File(Const.getTempDirectory(), relOrigin);
+            FileUtils.copyFile(mOriginFrom, mTempCopy, true);
+        }
+        return mTempCopy;
     }
 
     @Override

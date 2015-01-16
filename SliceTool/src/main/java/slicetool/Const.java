@@ -43,6 +43,10 @@ public class Const {
         return SOURCE_DIR;
     }
 
+    public static File getTempDirectory() {
+        return TEMP_DIR;
+    }
+
     public static File getDefaultImagesDirectory() {
         return DEF_IMAGES_DIR;
     }

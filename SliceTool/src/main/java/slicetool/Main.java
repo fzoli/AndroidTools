@@ -21,7 +21,6 @@ package slicetool;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import slicetool.config.persister.DirectoryMappingPersister;
 
-import java.io.File;
 import java.io.FileFilter;
 
 /**
@@ -29,7 +28,7 @@ import java.io.FileFilter;
  */
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         try {
             FileFilter filter = new WildcardFileFilter(new String[]{"*.png"});
             System.out.println(DirectoryMappingPersister.getInstance().readConfig().listFiles(filter));

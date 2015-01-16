@@ -53,17 +53,17 @@ public final class DirectoryMapping extends HashMap<String, String> implements S
                 String srcRel = src.getRelativePaths().get(srcIndex);
                 int dstIndex = dst.getRelativePaths().indexOf(srcRel);
                 if (dstIndex != -1) {
-                    list.add(new FileMeta(src.getFiles().get(srcIndex), dst.getFiles().get(dstIndex)));
+                    list.add(new FileMeta(srcDir, dstDir, src.getFiles().get(srcIndex), dst.getFiles().get(dstIndex)));
                     proceed.add(dstIndex);
                 }
                 else {
-                    list.add(new FileMeta(src.getFiles().get(srcIndex), null));
+                    list.add(new FileMeta(srcDir, dstDir, src.getFiles().get(srcIndex), null));
                 }
             }
 
             for (int dstIndex = 0; dstIndex < dst.getRelativePaths().size(); dstIndex++) {
                 if (!proceed.contains(dstIndex)) {
-                    list.add(new FileMeta(null, dst.getFiles().get(dstIndex)));
+                    list.add(new FileMeta(srcDir, dstDir, null, dst.getFiles().get(dstIndex)));
                 }
             }
 
