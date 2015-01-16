@@ -1,0 +1,55 @@
+Core
+----------------------------------------------------
+
+Feladat: slice-ok áthelyezése és ellenőrzése (a könyvtárnak megfelelő másik könyvtárba)
+pl. ./slice/images/xhdpi -> ./src/main/res/drawable-xhdpi
+
+Egy kép feldolgozásának menete:
+1. ellenőrzés
+2. kép manipulálás(ok) (pl. 9-patch)
+3. a) áthelyezés (felülírás/létrehozás)
+   b) törlés (megszűnt, warning a logba)
+
+Képlista input (paraméterrel megadható):
+a) rekurzívan minden kép (-r)
+b) parancssor paraméterben felsorolás
+c) szövegfájl, soronkénti fájlnév felsorolás (nincs paraméterben felsorolás és létezik a szövegfájl)
+A pontos fájlnév helyett a * is használható több kép megjelölésére.
+
+Áthelyezés előtti ellenőrzések:
+1. létezik-e az új kép minden méretben (kivétellista felmenthet a szabály alól)
+2. ha van előző kép (frissítés), az új és a régi mérete egyezik-e (opcionálisan kikapcsolható paraméterrel)
+
+Ellenőrzés üzemmódja (paraméterrel megadható):
+a) szigorú: az első hibánál leáll a script (default)
+b) megengedő: a script a nem érvényes képeket kihagyja (-f)
+A hibák az üzemmódtól függetlenül naplózódnak.
+
+
+Lehetséges futási hibák (az ellenőrzés előtt):
+- ha a képlista input manuális felsorolás - b vagy c -, akkor lehetnek nem létező fájlok
+- az új fájl nem érvényes kép
+
+
+Könyvtárszerkezet:
+./slice/cp - a shell script
+./slice/images - könyvtár, tartalmazza a designer által küldött sliceokat
+./slice/directories.properties - a ./slice/images könyvtárban található felbontásfüggő könyvtárak nevét lehet benne megadni, ha a nevek eltérnek a standardtól (mappelés)
+./slice/slice-list.txt - a képlista input szöveges fájl (ha nem rekurzívan és nem parancssoros felsorolással fut a script)
+./slice/single-images.txt - kivétellista, a nem minden felbontásban kötelező képek listája
+./slice/images/cp.log - az utolsó futás figyelmeztetéseit tartalmazó fájl
+
+A ./slice/images mehet a gitignore-ba.
+
+
+Rövid leírás opcionális modulokról
+----------------------------------------------------
+
+9-patch képmanipuláló modul:
+- Az eredeti sliceok helyett '.9.png' végződéssel teszi a képet a helyükre.
+- 2 x 2 pixellel nagyobb képet generál és ellenőrzi a patch minta méretét.
+
+Képvágó modul:
+- Két attribútuma van: TopBottomMargin és LeftRightMargin
+- Kizárólag a margót tartja meg a képből. (jól jön a 9-patchelés előtt, ha a kép "közepe" fölöslegesen túl nagy)
+
