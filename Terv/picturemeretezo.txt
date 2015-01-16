@@ -45,6 +45,10 @@ A ./slice/images mehet a gitignore-ba.
 Rövid leírás opcionális modulokról
 ----------------------------------------------------
 
+Képátnevező modul:
+- Más néven másolja az egyes (definiált) képeket.
+- Ez érinti az összes többi szolgáltatást. (pl. hogy létezik-e már a kép, azt az új név alapján kell ellenőrizni)
+
 9-patch képmanipuláló modul:
 - Az eredeti sliceok helyett '.9.png' végződéssel teszi a képet a helyükre.
 - 2 x 2 pixellel nagyobb képet generál és ellenőrzi a patch minta méretét.
@@ -52,4 +56,9 @@ Rövid leírás opcionális modulokról
 Képvágó modul:
 - Két attribútuma van: TopBottomMargin és LeftRightMargin
 - Kizárólag a margót tartja meg a képből. (jól jön a 9-patchelés előtt, ha a kép "közepe" fölöslegesen túl nagy)
+
+A képmanipuláló modulok prioritása (futási sorrend):
+1. képátnevező
+2. képvágó
+3. 9-patch
 
