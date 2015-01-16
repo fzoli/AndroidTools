@@ -1,5 +1,5 @@
 /*
- * Main.java
+ * ConfigReadException.java
  *
  * This file is part of SliceTool.
  *
@@ -16,27 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with SliceTool.  If not, see <http ://www.gnu.org/licenses/>.
  */
-package slicetool;
-
-import org.apache.commons.io.filefilter.WildcardFileFilter;
-import slicetool.config.persister.DirectoryMappingPersister;
-
-import java.io.File;
-import java.io.FileFilter;
+package slicetool.config.persister.exception;
 
 /**
  * Created by Zoltán Farkas on 2015.01.16.
  */
-public class Main {
-
-    public static void main(String[] args) throws InterruptedException {
-        try {
-            FileFilter filter = new WildcardFileFilter(new String[]{"*.png"});
-            System.out.println(DirectoryMappingPersister.getInstance().readConfig().listFiles(filter));
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+public class ConfigReadException extends Exception {
+    public ConfigReadException(Throwable cause) {
+        super(cause);
     }
-
 }

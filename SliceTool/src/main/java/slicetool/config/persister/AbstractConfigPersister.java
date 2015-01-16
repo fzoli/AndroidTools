@@ -1,13 +1,34 @@
+/*
+ * AbstractConfigPersister.java
+ *
+ * This file is part of SliceTool.
+ *
+ * SliceTool is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SliceTool is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SliceTool.  If not, see <http ://www.gnu.org/licenses/>.
+ */
 package slicetool.config.persister;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import slicetool.config.exception.ConfigReadException;
-import slicetool.config.exception.ConfigWriteException;
+import slicetool.config.persister.exception.ConfigReadException;
+import slicetool.config.persister.exception.ConfigWriteException;
 import slicetool.util.Folders;
 
 import java.io.*;
 
+/**
+ * Created by Zoltán Farkas on 2015.01.16.
+ */
 abstract class AbstractConfigPersister<T extends Serializable> {
 
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

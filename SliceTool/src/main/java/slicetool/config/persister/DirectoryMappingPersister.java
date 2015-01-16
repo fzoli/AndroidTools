@@ -37,9 +37,11 @@ public final class DirectoryMappingPersister extends AbstractConfigPersister<Dir
     private static void addDefaultEntry(DirectoryMapping def, String dirName) {
         File fileFrom = new File(Const.getDefaultImagesDirectory(), dirName);
         String pathFrom = Folders.toRelativePath(Const.getSourceDirectory(), fileFrom);
-        File fileTo = new File(Const.getSourceDirectory().getParentFile(), "src/main/res/" + dirName);
+        File fileTo = new File(Const.getSourceDirectory().getParentFile(), Folders.joinPath("src", "main", "res", dirName));
         String pathTo = Folders.toRelativePath(Const.getSourceDirectory(), fileTo);
-        def.put(pathFrom, pathTo);
+        //if (fileTo.isDirectory()) {
+            def.put(pathFrom, pathTo);
+        //}
     }
 
 }

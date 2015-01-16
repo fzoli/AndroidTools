@@ -1,5 +1,5 @@
 /*
- * Main.java
+ * FileMeta.java
  *
  * This file is part of SliceTool.
  *
@@ -18,25 +18,44 @@
  */
 package slicetool;
 
-import org.apache.commons.io.filefilter.WildcardFileFilter;
-import slicetool.config.persister.DirectoryMappingPersister;
-
 import java.io.File;
-import java.io.FileFilter;
 
 /**
  * Created by Zoltán Farkas on 2015.01.16.
  */
-public class Main {
+public class FileMeta {
 
-    public static void main(String[] args) throws InterruptedException {
-        try {
-            FileFilter filter = new WildcardFileFilter(new String[]{"*.png"});
-            System.out.println(DirectoryMappingPersister.getInstance().readConfig().listFiles(filter));
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    private File mOriginFrom, mMoveFrom, mMoveTo;
+
+    public FileMeta(File moveFrom, File moveTo) {
+        mOriginFrom = moveFrom;
+        mMoveFrom = moveFrom;
+        mMoveTo = moveTo;
+    }
+
+    public File getOriginFrom() {
+        return mOriginFrom;
+    }
+
+    public File getMoveFrom() {
+        return mMoveFrom;
+    }
+
+    public File getMoveTo() {
+        return mMoveTo;
+    }
+
+    public void setMoveFrom(File moveFrom) {
+        mMoveFrom = moveFrom;
+    }
+
+    public void setMoveTo(File moveTo) {
+        mMoveTo = moveTo;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("FileMeta(originFrom='%s', moveFrom='%s', moveTo='%s')", mOriginFrom, mMoveFrom, mMoveTo);
     }
 
 }
