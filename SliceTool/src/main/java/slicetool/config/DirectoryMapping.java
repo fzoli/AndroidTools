@@ -39,14 +39,18 @@ public final class DirectoryMapping extends HashMap<String, String> implements S
     }
 
     public List<FileMeta> listFiles(FileFilter... filters) {
+        return listFiles(1, filters);
+    }
+
+    public List<FileMeta> listFiles(int depth, FileFilter... filters) {
         List<FileMeta> list = new ArrayList<FileMeta>();
         Iterator<Entry<String, String>> it = entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, String> e = it.next();
             File srcDir = Const.fromSource(e.getKey());
             File dstDir = Const.fromSource(e.getValue());
-            Folders.ListFileProcessor src = Folders.listFiles(srcDir, 1, filters);
-            Folders.ListFileProcessor dst = Folders.listFiles(dstDir, 1, filters);
+            Folders.ListFileProcessor src = Folders.listFiles(srcDir, depth, filters);
+            Folders.ListFileProcessor dst = Folders.listFiles(dstDir, depth, filters);
 
             List<Integer> proceed = new ArrayList<Integer>();
             for (int srcIndex = 0; srcIndex < src.getRelativePaths().size(); srcIndex++) {

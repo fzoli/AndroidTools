@@ -192,6 +192,9 @@ public class Folders {
     }
 
     public static String toRelativePath(File absolutePath, File relativeTo) {
+        if (absolutePath == null || relativeTo == null) {
+            return null;
+        }
         return toRelativePath(absolutePath.getAbsolutePath(), relativeTo.getAbsolutePath());
     }
 

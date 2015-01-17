@@ -29,6 +29,7 @@ import java.io.IOException;
  */
 public class FileMeta {
 
+    private final String mOriginFromRelPath, mOriginToRelPath;
     private final File mSrcDir, mDstDir, mOriginFrom;
 
     private File mTempCopy, mMoveFrom, mMoveTo;
@@ -36,8 +37,12 @@ public class FileMeta {
     public FileMeta(File srcDir, File dstDir, File moveFrom, File moveTo) {
         mSrcDir = srcDir;
         mDstDir = dstDir;
+
+        mOriginFromRelPath = Folders.toRelativePath(srcDir, moveFrom);
         mOriginFrom = moveFrom;
         mMoveFrom = moveFrom;
+
+        mOriginToRelPath = Folders.toRelativePath(dstDir, moveTo);
         mMoveTo = moveTo;
     }
 
