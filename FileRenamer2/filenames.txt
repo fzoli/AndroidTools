@@ -1,0 +1,24 @@
+changempin_header_bg		bg_mpin_header
+carddetails_header_bg		bg_mpi_detail_header
+payment_header_bg		bg_payment_header
+registration_step_bg_1		bg_registration_step_1
+registration_step_bg_2		bg_registration_step_2
+registration_step_bg_3		bg_registration_step_3
+registration_step_bg_4		bg_registration_step_4
+registration_step_bg_5		bg_registration_step_5
+icon_checkbox_inverse_normal	btn_check_off
+icon_checkbox_inverse_checked	btn_check_on
+icon_small_refresh_inverse	ic_action_reload
+icon_small_add_inverse		ic_action_new
+
+icon_small_reset		ic_drawer_reset
+icon_small_faq			ic_drawer_faq
+icon_small_feedback		ic_drawer_feedback
+icon_small_mpin			ic_drawer_mpin
+icon_small_about		ic_drawer_about
+
+icon_small_cardholder		ic_avatar_dark
+icon_small_company		ic_bag_dark
+icon_small_date			ic_calendar_dark
+icon_small_details		ic_clipboard_dark
+
