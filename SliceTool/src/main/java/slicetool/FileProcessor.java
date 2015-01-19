@@ -29,7 +29,9 @@ public class FileProcessor implements Runnable {
         if (appArgs != null) {
             for (String arg : appArgs) {
                 if (arg.equals("-r")) {
+                    mArgFileList.clear();
                     mArgFileList.add("*");
+                    break;
                 }
                 if (!arg.startsWith("-")) {
                     mArgFileList.add(arg);
@@ -38,14 +40,24 @@ public class FileProcessor implements Runnable {
         }
     }
 
+    private void readConfigs() throws ConfigReadException{
+        mDirectoryMapping = DirectoryMappingPersister.getInstance().readConfig();
+        mFileFilterList = FileFilterListPersister.getInstance().args(mArgFileList).readConfig();
+    }
+
+    private List<FileMeta> getFileMetaList() {
+        FileFilter filter = new WildcardFileFilter(mFileFilterList);
+        return mDirectoryMapping.listFiles(filter);
+    }
+
     @Override
     public void run() {
         try {
-            mDirectoryMapping = DirectoryMappingPersister.getInstance().readConfig();
-            mFileFilterList = FileFilterListPersister.getInstance().args(mArgFileList).readConfig();
-            FileFilter filter = new WildcardFileFilter(mFileFilterList);
-            List<FileMeta> metas = mDirectoryMapping.listFiles(filter);
-            System.out.println(metas);
+            readConfigs();
+            List<FileMeta> metas = getFileMetaList();
+            for (FileMeta meta : metas) {
+                System.out.println(meta);
+            }
         }
         catch (ConfigReadException ex) {
             throw new RuntimeException(ex);

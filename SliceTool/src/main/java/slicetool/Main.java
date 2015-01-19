@@ -24,6 +24,7 @@ package slicetool;
 public class Main {
 
     public static void main(String[] args) {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
         new FileProcessor(args).run();
     }
 
