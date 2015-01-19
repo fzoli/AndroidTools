@@ -18,27 +18,13 @@
  */
 package slicetool;
 
-import org.apache.commons.io.filefilter.WildcardFileFilter;
-import slicetool.config.FileFilterList;
-import slicetool.config.persister.DirectoryMappingPersister;
-import slicetool.config.persister.FileFilterListPersister;
-
-import java.io.FileFilter;
-
 /**
  * Created by Zoltán Farkas on 2015.01.16.
  */
 public class Main {
 
     public static void main(String[] args) {
-        try {
-            FileFilterList fileFilterList = FileFilterListPersister.getInstance().args(null).readConfig();
-            FileFilter filter = new WildcardFileFilter(fileFilterList);
-            System.out.println(DirectoryMappingPersister.getInstance().readConfig().listFiles(filter));
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        new FileProcessor(args).run();
     }
 
 }

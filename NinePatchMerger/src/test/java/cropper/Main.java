@@ -19,7 +19,7 @@ public class Main {
         "/home/zoli/workspace/paystation/src/main/res/drawable-xxhdpi/btn_*.png"
     };
 
-    private static int marginLeftRight = 16, marginTopBottom = 12;
+    private static int marginLeftRight = 16, marginTopBottom = 14;
 
     private static void putFile(List<File> ls, File f) {
         if (f.isFile()) {
