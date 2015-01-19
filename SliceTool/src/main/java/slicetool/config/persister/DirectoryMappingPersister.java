@@ -1,12 +1,12 @@
 package slicetool.config.persister;
 
-import slicetool.Const;
+import slicetool.ConstFiles;
 import slicetool.config.DirectoryMapping;
 import slicetool.util.Folders;
 
 import java.io.File;
 
-public final class DirectoryMappingPersister extends AbstractConfigPersister<DirectoryMapping> {
+public final class DirectoryMappingPersister extends AbstractJsonConfigPersister<DirectoryMapping> {
 
     private static final DirectoryMappingPersister INSTANCE = new DirectoryMappingPersister();
 
@@ -20,7 +20,7 @@ public final class DirectoryMappingPersister extends AbstractConfigPersister<Dir
 
     @Override
     protected File getConfigFile() {
-        return Const.getDirectoryMappingConfigFile();
+        return ConstFiles.getDirectoryMappingConfigFile();
     }
 
     @Override
@@ -35,10 +35,10 @@ public final class DirectoryMappingPersister extends AbstractConfigPersister<Dir
     }
 
     private static void addDefaultEntry(DirectoryMapping def, String dirName) {
-        File fileFrom = new File(Const.getDefaultImagesDirectory(), dirName);
-        String pathFrom = Folders.toRelativePath(Const.getSourceDirectory(), fileFrom);
-        File fileTo = new File(Const.getSourceDirectory().getParentFile(), Folders.joinPath("src", "main", "res", dirName));
-        String pathTo = Folders.toRelativePath(Const.getSourceDirectory(), fileTo);
+        File fileFrom = new File(ConstFiles.getDefaultImagesDirectory(), dirName);
+        String pathFrom = Folders.toRelativePath(ConstFiles.getSourceDirectory(), fileFrom);
+        File fileTo = new File(ConstFiles.getSourceDirectory().getParentFile(), Folders.joinPath("src", "main", "res", dirName));
+        String pathTo = Folders.toRelativePath(ConstFiles.getSourceDirectory(), fileTo);
         //if (fileTo.isDirectory()) {
             def.put(pathFrom, pathTo);
         //}

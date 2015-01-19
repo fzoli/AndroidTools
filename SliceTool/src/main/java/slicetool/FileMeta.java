@@ -69,7 +69,7 @@ public class FileMeta {
     public File getTempCopy() throws IOException {
         if (mTempCopy == null && mOriginFrom != null && mOriginFrom.isFile()) {
             String relOrigin = Folders.toRelativePath(mSrcDir.getParentFile(), mOriginFrom);
-            mTempCopy = new File(Const.getTempDirectory(), relOrigin);
+            mTempCopy = new File(ConstFiles.getTempDirectory(), relOrigin);
             FileUtils.copyFile(mOriginFrom, mTempCopy, true);
         }
         return mTempCopy;

@@ -18,7 +18,7 @@
  */
 package slicetool.config;
 
-import slicetool.Const;
+import slicetool.ConstFiles;
 import slicetool.FileMeta;
 import slicetool.util.Folders;
 
@@ -47,8 +47,8 @@ public final class DirectoryMapping extends HashMap<String, String> implements S
         Iterator<Entry<String, String>> it = entrySet().iterator();
         while (it.hasNext()) {
             Entry<String, String> e = it.next();
-            File srcDir = Const.fromSource(e.getKey());
-            File dstDir = Const.fromSource(e.getValue());
+            File srcDir = ConstFiles.fromSource(e.getKey());
+            File dstDir = ConstFiles.fromSource(e.getValue());
             Folders.ListFileProcessor src = Folders.listFiles(srcDir, depth, filters);
             Folders.ListFileProcessor dst = Folders.listFiles(dstDir, depth, filters);
 

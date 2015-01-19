@@ -1,5 +1,5 @@
 /*
- * Const.java
+ * ConstFiles.java
  *
  * This file is part of SliceTool.
  *
@@ -24,7 +24,7 @@ import java.io.File;
 /**
  * Created by Zoltán Farkas on 2015.01.16.
  */
-public class Const {
+public class ConstFiles {
 
     private static final File SOURCE_DIR = Folders.getSourceDir();
     private static final File TEMP_DIR = new File(SOURCE_DIR, "tmp");
@@ -32,7 +32,8 @@ public class Const {
 
     private static final File DEF_IMAGES_DIR = new File(SOURCE_DIR, "images");
 
-    private static final File DIRECTORY_MAPPING_CFG = new File(CFG_DIR, "directory_mapping.txt");
+    private static final File DIRECTORY_MAPPING_CFG = new File(CFG_DIR, "directory_mapping.json");
+    private static final File FILE_FILTER_LIST_CFG = new File(CFG_DIR, "file_filters.txt");
 
     static {
         Folders.createTempDir(TEMP_DIR);
@@ -55,8 +56,12 @@ public class Const {
         return DIRECTORY_MAPPING_CFG;
     }
 
-    public static File fromSource(String path) {
-        return new File(getSourceDirectory(), path);
+    public static File getFileFilterListConfigFile() {
+        return FILE_FILTER_LIST_CFG;
+    }
+
+    public static File fromSource(String relPath) {
+        return new File(getSourceDirectory(), relPath);
     }
 
 }
