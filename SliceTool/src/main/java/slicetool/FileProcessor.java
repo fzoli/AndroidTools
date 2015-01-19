@@ -55,6 +55,7 @@ public class FileProcessor implements Runnable {
         try {
             readConfigs();
             List<FileMeta> metas = getFileMetaList();
+            System.out.println("Mappings count: " + mDirectoryMapping.getSrcDirectoryCount());
             for (FileMeta meta : metas) {
                 System.out.println(meta);
             }

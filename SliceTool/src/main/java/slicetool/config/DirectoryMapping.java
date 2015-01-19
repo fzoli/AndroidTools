@@ -25,10 +25,7 @@ import slicetool.util.Folders;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Zoltán Farkas on 2015.01.16.
@@ -73,6 +70,14 @@ public final class DirectoryMapping extends HashMap<String, String> implements S
 
         }
         return list;
+    }
+
+    public int getSrcDirectoryCount() {
+        return getDirectoryCount(keySet());
+    }
+
+    private int getDirectoryCount(Set<String> set) {
+        return 0; // TODO
     }
 
 }
