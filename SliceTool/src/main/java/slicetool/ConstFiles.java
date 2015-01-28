@@ -61,6 +61,7 @@ public class ConstFiles {
     }
 
     public static File fromSource(String relPath) {
+        if (relPath.startsWith("/")) return new File(relPath);
         return new File(getSourceDirectory(), relPath);
     }
 
